@@ -1,0 +1,131 @@
+<mat-card class="task-card">
+  <mat-card-title>Add New Task</mat-card-title>
+
+  <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+      <mat-grid-list cols="2" rowHeight="90px" gutterSize="10px">
+   
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Subject</mat-label>
+          <input matInput formControlName="title" />
+           @if(taskForm.get('title')?.hasError('required')) {
+             <mat-error>Title is required.</mat-error>
+           }
+        </mat-form-field><br>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+           @if(taskForm.get('description')?.hasError('required')) {
+             <mat-error>Description is required.</mat-error>
+           }
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Assign To</mat-label>
+          <mat-select formControlName="assignTo">
+             @for(member of teamMembers; track member.id) {
+              <mat-option [value]=member.label>{{member.label}}</mat-option>
+           }
+          </mat-select> 
+          @if(taskForm.get('assignTo')?.hasError('required')) {
+             <mat-error>AssignTo is required.</mat-error>
+           }
+          
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Team</mat-label>
+          <mat-select formControlName="team" multiple>
+             @for(member of teamMembers; track member.id) {
+              <mat-option [value]=member.label>{{member.label}}</mat-option>
+             }
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Due Date</mat-label>
+          <input matInput [matDatepicker]="picker" formControlName="dueDate" />
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+           @if(taskForm.get('dueDate')?.hasError('required')) {
+             <mat-error>DueDate is required.</mat-error>
+           }
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Status</mat-label>
+          <mat-select formControlName="status">
+             @for(status of statusOptions; track status.id) {
+               <mat-option [value]="status.label">{{status.label}}</mat-option>
+              }
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Task Type</mat-label>
+          <input matInput formControlName="taskType" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Menu Name</mat-label>
+          <input matInput formControlName="menuName" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Developer</mat-label>
+          <input matInput formControlName="developer" />
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Duration (mins)*</mat-label>
+          <input matInput type="number" formControlName="duration" />
+           @if(taskForm.get('duration')?.hasError('required')) {
+             <mat-error>Duration is required.</mat-error>
+           } @else if(taskForm.get('duration')?.hasError('min')) {
+             <mat-error>Minimum duration should be 5 mins.</mat-error>
+           } @else if(taskForm.get('duration')?.hasError('max')) {
+             <mat-error>Maximum duration should be 100 mins.</mat-error>
+           }
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="2">
+        <mat-form-field appearance="fill" style="width: 100%;">
+          <mat-label>Priority</mat-label>
+          <mat-select formControlName="priority">
+             @for(priority of priorityOptions; track priority.id) {
+               <mat-option [value]=priority.label>{{priority.label}}</mat-option>
+              }
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <div class="form-actions">
+      <button mat-raised-button color="primary" type="submit" style="background-color: blue;color: white;" 
+        [disabled]="taskForm.invalid || taskForm.pristine" [class.disabled]="taskForm.invalid || taskForm.pristine">
+        Add Task
+      </button>
+      <button mat-stroked-button type="button" (click)="onCancel()">Cancel</button>
+    </div>
+  </form>
+</mat-card>

@@ -1,0 +1,29 @@
+<!-- <div class="summary-cards"> -->
+<mat-card style="padding: 30px;" class="mat-elevation-z3">
+
+   <div style="display: flex; gap: 18px; margin-bottom: 12px;" class="container">
+     <mat-card class="status-card box" style="background: yellow;">
+       In Progress: {{inProgressCount}}
+     </mat-card>
+     <mat-card class="status-card box" style="background: green;">
+       Completed: {{completedCount}}
+     </mat-card>
+     <mat-card class="status-card box" style="background: #8fb1e6;">
+       Confirmed: {{confirmedCount}}
+     </mat-card>
+     <mat-card class="status-card box" style="background: #e46d6d;">
+       Overdue: {{overdueCount}}
+     </mat-card>
+
+    <span class="spacer"></span>
+    <mat-form-field appearance="outline" class="box move-next-line">
+      <input matInput (input)="applyFilter($event)" placeholder="Search by Status or Subject">
+    </mat-form-field>
+  </div>
+
+  <app-task-display [filteredTasks]="filterString"></app-task-display>
+
+  <!-- <app-task-progress></app-task-progress> -->
+
+</mat-card>
+ 

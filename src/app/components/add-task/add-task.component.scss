@@ -1,0 +1,18 @@
+.task-card {
+  max-width: 720px;
+  margin: 32px auto;
+  padding: 24px;
+  box-sizing: border-box;
+}
+
+.form-actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+}
+
+.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}

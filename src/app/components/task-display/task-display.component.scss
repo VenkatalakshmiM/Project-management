@@ -1,0 +1,45 @@
+.summary-cards {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+mat-card {
+  min-width: 120px;
+  text-align: center;
+}
+.dashboard-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  background: linear-gradient(100deg, #e3f2fd 60%, #fff 100%);
+}
+
+.mat-chip-list {
+  margin-bottom: 12px;
+}
+
+.task-table-card {
+  margin-top: 16px;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(50,100,200,0.07);
+  overflow-x: auto;
+}
+
+.table-list {
+  width: 100%;
+  border-spacing: 0;
+}
+
+@media (max-width: 900px) {
+  .task-table-card {
+    display: none;
+  }
+  .task-cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+}
